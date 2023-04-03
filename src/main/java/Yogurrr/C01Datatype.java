@@ -1,6 +1,6 @@
 package Yogurrr;
 
-public class c01Datatype {
+public class C01Datatype {
     public static void main(String [] args) {
         // 변수와 자료형
         // 변수는 데이터를 담는 그릇
