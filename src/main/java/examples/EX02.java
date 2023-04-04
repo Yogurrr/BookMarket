@@ -47,5 +47,21 @@ public class EX02 {
         System.out.println("1만원권 : " + ilman + "장");
         System.out.println("5천원권 : " + ochun + "장");
         System.out.println("1천원권 : " + ilchun + "장");
+
+
+        // 연습
+        final double PI = 3.14;
+        System.out.println("\n<연습>");
+        System.out.println("\\");
+        System.out.println("\'");
+        System.out.println("\"");
+
+        int a = 10;
+        double b = 4;
+        System.out.println("10 / 4 = " + a / b);
+
+        int c = 10;
+        int d = 4;
+        System.out.println("10 / 4 = " + (double) c / d);
     }
 }

@@ -68,12 +68,12 @@ public class EX04 {
         int data3 = 12345;
 
         fmt = "하루는 86,400초, %,d초는 약 %,.2f일\n";
-        System.out.printf(fmt, data1, (double) data1 / daysec);
+        System.out.printf(fmt, data1, data1 / daysec);
 
         fmt = "한 시간은 3,600초, %,d초는 약 %.2f시간\n";
-        System.out.printf(fmt, data2, (double) data2 / hour);
+        System.out.printf(fmt, data2, data2 / hour);
 
         fmt = "1분은 60초, %,d초는 약 %.2f분";
-        System.out.printf(fmt, data3, (double) data3 / minute);
+        System.out.printf(fmt, data3, data3 / minute);
     }
 }
