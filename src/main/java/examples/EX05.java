@@ -161,5 +161,24 @@ public class EX05 {
         }
 
         System.out.printf(result);
+
+
+
+        // Q34 - CalcurateFee
+        // 거리에 따라 다음 요금이 정해져 있다. 거리를 km로 입력했을 때 배송료를 계산하는 프로그램을 작성하여라.
+        // 가. 50km 미만 : 10000원
+        // 나. 50 ~ 100km : 18000원
+        // 다. 100 ~ 300km : 55000원
+        // 라. 300km 이상 : 75000원
+        System.out.println("\n\n거리는? ");
+        int distance = sc.nextInt();
+        int fee = 0;
+
+        if (distance >= 300) fee = 75000;
+        else if (distance < 300 && distance >= 100) fee = 55000;
+        else if (distance < 100 && distance >= 50) fee = 18000;
+        else fee = 10000;
+
+        System.out.printf("거리가 %dkm면 배송료는 %d원입니다.", distance, fee);
     }
 }
