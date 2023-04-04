@@ -26,7 +26,7 @@ public class C04Scanner {
         int mat = sc.nextInt();
 
         int tot = kor + eng + mat;
-        double avg = (double) tot / 3;
+        double avg = tot / 3;
         char grd = avg >= 90 ? '수' :
                    avg >= 80 ? '우' :
                    avg >= 70 ? '미' :

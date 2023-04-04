@@ -1,6 +1,6 @@
 # Additional Explanation
 
-### 특수기호
+### escape 문자
 + '\n' : 다음칸 맨 앞으로 이동
 + '\r' : 다음칸으로 이동
 + '\t' : tab키와 같은 기능
