@@ -104,7 +104,7 @@ public class J06Loop {
         System.out.printf("입력하신 숫자는 %d, %d, %d, %d, %d이고", a, b, c, d, e);
         System.out.printf("총합은 %d, 평균은 %.1f입니다\n", sum, avg);
 
-        // 5개의 정수를 입력 받아 총합을 구하고 결과 출력
+        // 5개의 정수를 입력 받아 총합을 구하고 결과 출력 v2
         System.out.println("\n5개의 정수를 입력 받아 총합을 구하고 결과 출력 v2");
         String nums = "";
         sum = 0;
@@ -143,7 +143,6 @@ public class J06Loop {
             if (i % 5 == 0 || i % 7 == 0) continue;
             sum += i;
             if (sum >= 10000) {
-//                if (i % 5 == 0 || i % 7 == 0) continue;
                 break;
             }
         }
