@@ -1,11 +1,9 @@
 package Yogurrr;
 
-import java.util.ArrayList;
-
 public class J15OOP {
     // 클래스 종류
     // Service : 비지니스 로직 처리를 담당하는 클래스
-    // VO로 저장된 데이터를 DAO로 넘기기 전에
+    // VO(Value Object)로 저장된 데이터를 DAO(Data Access Object)로 넘기기 전에
     // 처리해야 하는 일반적인 작업을 기능으로 구현한 클래스
     // 메서드만 저장하기 위해 생성하는 클래스
 
@@ -103,13 +101,13 @@ class MemberService {   // 서비스 클래스를 만들 때에는 이 5개를 �
     }
 
     // 회원 조회(R) : read~
-    public Member[] readMember() {
+    public MemberShip[] readMember() {
         System.out.println("회원정보 리스트 조회");
         return null;
     }
 
     // 회원 조회(R) : readOne~
-    public Member readOneMember(String name) {
+    public MemberShip readOneMember(String name) {
         System.out.println("회원정보 상세 조회");
         return null;
     }
