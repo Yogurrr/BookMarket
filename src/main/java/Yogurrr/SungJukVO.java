@@ -1,14 +1,14 @@
 package Yogurrr;
 
 public class SungJukVO {
-    public static void main(String[] args) {
-        SungJukVO d1 = new SungJukVO("홍길동1", 100, 90, 97);
-        SungJukVO d2 = new SungJukVO("홍길동2", 50, 66, 43);
-        SungJukVO d3 = new SungJukVO("홍길동3", 73, 79, 88);
-        System.out.println(d1);
-        System.out.println(d2);
-        System.out.println(d3);
-    }
+//    public static void main(String[] args) {
+//        SungJukVO d1 = new SungJukVO("홍길동1", 100, 90, 97);
+//        SungJukVO d2 = new SungJukVO("홍길동2", 50, 66, 43);
+//        SungJukVO d3 = new SungJukVO("홍길동3", 73, 79, 88);
+//        System.out.println(d1);
+//        System.out.println(d2);
+//        System.out.println(d3);
+//    }
 
     private String names;
     private int kors;
