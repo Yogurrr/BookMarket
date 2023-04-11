@@ -57,6 +57,22 @@ public class SungJukV1bServiceImpl implements SungJukV1bService {
     }
 
     public void readOneSungJuk() {
+        // 이름 입력 -> 대상 검색 -> 대상 출력
+        System.out.print("조회할 학생 이름은? ");
+        String name = sc.next();
+
+        SungJukVO one = null;
+        for(SungJukVO sj : sjs) {
+            if (sj != null && sj.getNames().equals(name)) {
+                one = sj; break;
+            }
+        }
+
+        if (one != null) {
+            System.out.println(one);
+        } else {
+            System.out.println("찾는 데이터가 없습니다!\n");
+        }
     }
 
     // 성적 리스트 조회 (이름, 국어, 영어, 수학)
