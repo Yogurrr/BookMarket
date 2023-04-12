@@ -2,6 +2,7 @@ package Yogurrr.project.sungjuk;
 
 import Yogurrr.project.sungjuk.service.SungJukV1bService;
 import Yogurrr.project.sungjuk.service.SungJukV1bServiceImpl;
+// import Yogurrr.project.sungjuk.service.*; -> 이렇게 쓸 수도 있지만 추천X (다 가져오니까 뭘 선별해서 쓰는지 알 수가 없음)
 
 public class SungJukV1bMain {
     // 성적 처리프로그램 v1b
@@ -17,6 +18,7 @@ public class SungJukV1bMain {
     // 0. 프로그램 종료
 
     public static void main(String[] args) {
+        // Yogurrr.project.sungjuk.service.SungJukV1bService sjsrv = new SungJukV1bServiceImpl(); -> 이렇게 쓸 수도 있음
         SungJukV1bService sjsrv = new SungJukV1bServiceImpl();
 
         while (true) {
