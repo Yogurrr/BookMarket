@@ -1,4 +1,4 @@
-package Yogurrr;
+package Yogurrr.project.bookmarket;
 
 public class BookMarket {
 

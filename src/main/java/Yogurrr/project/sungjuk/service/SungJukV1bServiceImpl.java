@@ -1,13 +1,15 @@
-package Yogurrr;
+package Yogurrr.project.sungjuk.service;
+
+import Yogurrr.project.sungjuk.model.SungJukVO;
 
 import java.util.Scanner;
 
-public class SungJukV1Service {
+public class SungJukV1bServiceImpl implements SungJukV1bService {
     private Scanner sc = null;
     SungJukVO[] sjs = null;
     private int idx = 0;
 
-    public SungJukV1Service() {
+    public SungJukV1bServiceImpl() {
         sc = new Scanner(System.in);
         sjs = new SungJukVO[10];
     }
@@ -50,25 +52,82 @@ public class SungJukV1Service {
     }
 }
 
-    private void removeSungJuk() {
+    public void removeSungJuk() {
+        // 이름 입력 -> 대상 검색 -> 대상 제거
+        System.out.print("삭제할 학생 이름은?");
+        String name = sc.next();
+
+        for (int i = 0; i < sjs.length; i++) {
+            if (sjs[i] != null && sjs[i].getNames().equals(name)) {
+                sjs[i] = null;   // 삭제할 배열 요소에 null 대입
+                System.out.println("\n삭제되었습니다\n");
+                break;
+            }
+        }
     }
 
-    private void modifySungJuk() {
+    public void modifySungJuk() {
+        // 이름 입력 -> 대상 검색 -> 새로운 데이터 입력 -> 성적 처리
+        System.out.print("수정할 학생 이름은? ");
+        String name = sc.next();
+
+        for (int i = 0; i < sjs.length; i++) {
+            if (sjs[i] != null && sjs[i].getNames().equals(name)) {
+//                System.out.println("이름은? ");
+//                sjs[i].setNames(sc.next());
+//                System.out.println("국어는? ");
+//                sjs[i].setKors(sc.nextInt());
+//                System.out.println("영어는? ");
+//                sjs[i].setEngs(sc.nextInt());
+//                System.out.println("수학은? ");
+//                sjs[i].setMats(sc.nextInt());
+
+                System.out.println("국어는? ");
+                int kor = sc.nextInt();
+                System.out.println("영어는? ");
+                int eng = sc.nextInt();
+                System.out.println("수학은? ");
+                int mat = sc.nextInt();
+
+                SungJukVO sj = new SungJukVO(name, kor, eng, mat);
+                computeSungJuk(sj);
+                sjs[i] = sj;   // 기존 성적데이터 위치에 새롭게 생성한 객체 대입
+                System.out.println("\n수정 완료!!\n");
+
+                break;
+            }
+        }
     }
 
-    private void readOneSungJuk() {
+    public void readOneSungJuk() {
+        // 이름 입력 -> 대상 검색 -> 대상 출력
+        System.out.print("조회할 학생 이름은? ");
+        String name = sc.next();
+
+        SungJukVO one = null;
+        for(SungJukVO sj : sjs) {
+            if (sj != null && sj.getNames().equals(name)) {
+                one = sj; break;
+            }
+        }
+
+        if (one != null) {
+            System.out.printf("\n%s\n", one);
+        } else {
+            System.out.println("찾는 데이터가 없습니다!\n");
+        }
     }
 
     // 성적 리스트 조회 (이름, 국어, 영어, 수학)
-    private void readSungJuk() {
-        String fmt = "%s %d %d %d\n";
+    public void readSungJuk() {
+        String fmt = "\n%s %d %d %d\n\n";
         for(SungJukVO sj : sjs) {
             if (sj != null) System.out.printf(fmt, sj.getNames(), sj.getKors(), sj.getEngs(), sj.getMats());
         }   // sjs 배열에 저장된 모든 성적 데이터 출력
     }
 
     // 성적 데이터 추가
-    private void newSungJuk() {
+    public void newSungJuk() {
         System.out.println("이름은? ");
         String name = sc.next();
         System.out.println("국어는? ");
@@ -83,7 +142,7 @@ public class SungJukV1Service {
         sjs[idx++] = sj;        // 처리된 성적 데이터 배열에 저장
     }
 
-    private void computeSungJuk(SungJukVO sj) {
+    public void computeSungJuk(SungJukVO sj) {
         sj.setTots( sj.getKors() + sj.getEngs() + sj.getMats() );
         sj.setAvgs((double) sj.getTots() / 3);
 

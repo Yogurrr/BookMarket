@@ -1,4 +1,4 @@
-package Yogurrr;
+package Yogurrr.project.sungjuk.model;
 
 public class SungJukVO {
 //    public static void main(String[] args) {

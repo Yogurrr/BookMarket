@@ -1,6 +1,6 @@
 package examples;
 
-import Yogurrr.SungJukVO;
+import Yogurrr.project.sungjuk.model.SungJukVO;
 
 import java.util.Scanner;
 

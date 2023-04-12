@@ -66,3 +66,6 @@
 - 불완전(uncompleted) 클래스라고 봐도 됨
 - 중괄호가 없는 클래스
 - 자식 클래스가 받아서 반드시 재정의하는 클래스
+
+### DAO
+- Data Access Object

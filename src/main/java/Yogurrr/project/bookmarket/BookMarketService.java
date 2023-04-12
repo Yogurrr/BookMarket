@@ -1,4 +1,6 @@
-package Yogurrr;
+package Yogurrr.project.bookmarket;
+
+import Yogurrr.MemberShip;
 
 import java.util.Scanner;
 

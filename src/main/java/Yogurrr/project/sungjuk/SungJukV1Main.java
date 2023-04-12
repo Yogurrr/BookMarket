@@ -1,4 +1,6 @@
-package Yogurrr;
+package Yogurrr.project.sungjuk;
+
+import Yogurrr.project.sungjuk.service.SungJukV1Service;
 
 public class SungJukV1Main {
     // 성적 처리프로그램 v1
