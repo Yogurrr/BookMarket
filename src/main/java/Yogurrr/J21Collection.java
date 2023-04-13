@@ -46,6 +46,10 @@ public class J21Collection {
 //        names.remove(3);
 //        System.out.println(names.get(3));
 
+        // 특정 요소 제거 : remove(값)
+//        names.remove("수지");
+//        System.out.println(names.get(names.size() - 1));
+
         // 데이터 검색
         // 위치로 찾음 : get(위치), indexOf
         // 값으로 찾음 : forEach, contains
