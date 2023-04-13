@@ -43,6 +43,9 @@
 
 ### 메서드 오버라이딩
 - 오버라이딩(overriding)이란 상속 관계에 있는 부모 클래스에서 이미 정의된 메소드를 자식 클래스에서 같은 시그니쳐를 갖는 메소드로 다시 정의하는 것
+- Indicates that a method declaration is intended to override a method declaration in a supertype. If a method is annotated with this annotation type compilers are required to generate an error message unless at least one of the following conditions hold:
+- The method does override or implement a method declared in a supertype.
+- The method has a signature that is override-equivalent to that of any public method declared in Object.
 
 ### 인터페이스
 - 서로 다른 두 시스템, 장치, 소프트웨어 따위를 서로 이어주는 부분 또는 그런 접속 장치
