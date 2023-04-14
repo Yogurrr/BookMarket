@@ -37,6 +37,17 @@ public class SungJukVO {
         else this.grds = '가';
     }
 
+    public SungJukVO(String names, int kors, int engs, int mats, int tots, double avgs, char grds) {
+        this(names, kors, engs, mats);
+        this.names = names;
+        this.kors = kors;
+        this.engs = engs;
+        this.mats = mats;
+        this.tots = tots;
+        this.avgs = avgs;
+        this.grds = grds;
+    }
+
     public String getNames() {
         return names;
     }

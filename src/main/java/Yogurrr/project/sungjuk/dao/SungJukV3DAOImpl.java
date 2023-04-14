@@ -56,10 +56,8 @@ public class SungJukV3DAOImpl implements SungJukV3DAO {
 
                 // SungJuk 객체에 개별 값을 저장하고
                 // 파일에 저장하면 자료형을 숫자로 저장해도 다 문자로 바뀜 그래서 가져올 때 숫자로 다시 형변환을 해야 함
-                SungJukVO sj = new SungJukVO(val[0], Integer.parseInt(val[1]), Integer.parseInt(val[2]), Integer.parseInt(val[3]));
-                sj.setTots(Integer.parseInt(val[4]));
-                sj.setAvgs(Double.parseDouble(val[5]));
-                sj.setGrds(val[6].charAt(0));
+                SungJukVO sj = new SungJukVO(val[0], Integer.parseInt(val[1]), Integer.parseInt(val[2]), Integer.parseInt(val[3]),
+                (Integer.parseInt(val[4])), (Double.parseDouble(val[5])), (val[6].charAt(0)));
 
                 // ArrayList 객체에 저장
                 sjdata.add(sj);
