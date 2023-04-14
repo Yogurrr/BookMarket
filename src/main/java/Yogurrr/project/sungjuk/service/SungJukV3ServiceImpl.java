@@ -133,6 +133,10 @@ public class SungJukV3ServiceImpl implements SungJukV1cService {   // 키보드 
     // 성적 리스트 조회 (이름, 국어, 영어, 수학)
     public void readSungJuk() {
         String fmt = "\n%s %d %d %d\n\n";
+
+        // 파일에 저장된 데이터를 모두 읽어서 arrayList 객체에 저장
+        sjs = sjdao.loadSungJuk();
+
         try {
             for (SungJukVO sj : sjs) {
                 if (sj != null) System.out.printf(fmt, sj.getNames(), sj.getKors(), sj.getEngs(), sj.getMats());
