@@ -64,14 +64,33 @@ public class SungJukV3DAOImpl implements SungJukV3DAO {
             }
 
         } catch (Exception ex) {
-            System.out.println("성적 데이터 저장 중 오류 발생");
+            System.out.println("성적 데이터 불러오는 중 오류 발생");
             System.out.println(ex.getMessage());
-//            return false;
         } finally {
             if (br != null) try { br.close(); } catch (Exception ex) { }
             if (fr != null) try { fr.close(); } catch (Exception ex) { }
         }
 
         return sjdata;
+    }
+
+    // ArrayList에 저장된 모든 성적데이터를 파일에 기록
+    @Override
+    public void writeSungJuk(List<SungJukVO> sjs) {
+        try {
+            fw = new FileWriter(fname);
+            bw = new BufferedWriter(fw);
+
+            for (SungJukVO sj : sjs) {
+                bw.write(sj.toString());
+            }   // 파일에 기록
+        } catch (Exception ex) {
+            System.out.println("성적 데이터 기록 중 오류 발생");
+            System.out.println(ex.getMessage());
+        } finally {
+            if (bw != null) try { bw.close(); } catch (Exception ex) { }
+            if (fw != null) try { fw.close(); } catch (Exception ex) { }
+        }
+
     }
 }
