@@ -1,5 +1,7 @@
 package Yogurrr.project.sungjuk.service;
 
+import Yogurrr.project.sungjuk.dao.SungJukV3DAO;
+import Yogurrr.project.sungjuk.dao.SungJukV3DAOImpl;
 import Yogurrr.project.sungjuk.model.SungJukVO;
 
 import java.io.*;
@@ -8,18 +10,15 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class SungJukV3ServiceImpl implements SungJukV1cService {
+public class SungJukV3ServiceImpl implements SungJukV1cService {   // 키보드 입력 받아서 리스트에 저장하는 역할
     private Scanner sc = null;
     private List<SungJukVO> sjs = null;
-    private String fname = "C:/Java/sungjukv3.dat";
-    private FileWriter fw = null;
-    private FileReader fr = null;
-    private BufferedWriter bw = null;
-    private BufferedReader br = null;
+    private SungJukV3DAO sjdao = null;
 
     public SungJukV3ServiceImpl() {
         sc = new Scanner(System.in);
         sjs = new ArrayList<>();
+        sjdao = new SungJukV3DAOImpl();
     }
 
     // 성적 프로그램 메뉴
@@ -165,19 +164,9 @@ public class SungJukV3ServiceImpl implements SungJukV1cService {
         SungJukVO sj = new SungJukVO(name, kor, eng, mat);
         computeSungJuk(sj);     // 성적 처리
 
-        // 생성된 성적 데이터를 파일에 저장
-        try {
-            // 파일 기록 시 추가 (append 기능 활성화)
-            fw = new FileWriter(fname, true);
-            bw = new BufferedWriter(fw);
-
-            bw.write(sj.toString());
-        } catch (Exception ex) {
-            System.out.println("성적 데이터 저장 중 오류 발생");
-            System.out.println(ex.getMessage());
-        } finally {
-            if (bw != null) try { bw.close(); } catch (Exception ex) { }
-            if (fw != null) try { fw.close(); } catch (Exception ex) { }
+        // 성적 데이터를 파일에 저장
+        if (sjdao.saveSungJuk(sj)) {
+            System.out.println("저장 성공!!");
         }
     }
 
