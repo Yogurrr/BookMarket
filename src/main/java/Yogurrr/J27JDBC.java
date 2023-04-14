@@ -1,15 +1,12 @@
 package Yogurrr;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Scanner;
 
 public class J27JDBC {
     private static String DRV = "org.mariadb.jdbc.Driver";
 //    private String URL = "jdbc.mariadb://fullstacks.cvdlpxnz2ebi.ap-northeast-2.rds.amazonaws.com:3306//fullstacks";
-    private static String URL = "jdbc:mariadb://fullstacks.cvdlpxnz2ebi.ap-northeast-2.rds.amazonaws.com:3306";
+    private static String URL = "jdbc:mariadb://fullstacks.cvdlpxnz2ebi.ap-northeast-2.rds.amazonaws.com:3306/fullstacks";
     private static String USR = "admin";
     private static String PWD = "fullstack_2023";
 
