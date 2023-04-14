@@ -21,6 +21,8 @@ public class J24File {
         FileWriter fw = null;
         try {
             fw = new FileWriter(fname);
+
+            fw.write(std01.toString());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         } finally {
@@ -36,10 +38,7 @@ public class J24File {
             fr = new FileReader(fname);
             br = new BufferedReader(fr);
 
-            while(br.ready()) {
-//                System.out.println(br.readLine());
-                stdinfo = br.readLine();
-            }
+            while(br.ready()) stdinfo = br.readLine();
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -60,6 +59,9 @@ public class J24File {
         System.out.println("생년월일 : " + info[4]);
         System.out.println("학과 : " + info[5]);
         System.out.println("교수 : " + info[6]);
+
+        // 객체의 멤버변수 성질을 잃어버린채
+        // 모두 문자형으로 출력됨
     }
 }
 
