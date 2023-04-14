@@ -1,7 +1,10 @@
 package Yogurrr;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 public class J28JDBC {
     private static String DRV = "org.mariadb.jdbc.Driver";
@@ -13,14 +16,7 @@ public class J28JDBC {
 
     public static void main(String[] args) {
         // newbooks 테이블의 모든 레코드 조회
-
-//        Scanner sc = new Scanner(System.in);
-//        System.out.println("도서명은? ");
-//        String bkname = sc.next();
-//        System.out.println("저자는? ");
-//        String author = sc.next();
-//        System.out.println("가격은? ");
-//        int price = sc.nextInt();
+        List<Book> bookdata = new ArrayList<>();
 
         try {
             Class.forName(DRV);
@@ -40,17 +36,22 @@ public class J28JDBC {
             rs = pstmt.executeQuery();  // DML 실행시 사용
 
             while(rs.next()) {
-                System.out.print(rs.getInt("bookno") + " ");
-                System.out.print(rs.getString("title") + " ");
-                System.out.print(rs.getString("writer") + "\n");
+                Book book = new Book(rs.getInt(1),
+                rs.getString(2), rs.getString(3),
+                        rs.getInt(4), rs.getString(5));
             }
 
         } catch (SQLException e) {
-            System.out.println("디비 접속주소나 아이디/비번을 확인하세요!!");
+            System.out.println("디비 접속주소나 아이디/비번, SQL문을 확인하세요!!");
         } finally {
             if (rs != null) try { rs.close(); } catch (Exception ex) {}
             if (pstmt != null) try { pstmt.close(); } catch (Exception ex) {}
             if (conn != null) try { conn.close(); } catch (Exception ex) {}
+        }
+
+        // 도서정보 출력
+        for (Book b : bookdata) {
+            System.out.println(b);
         }
     }
 }
@@ -71,5 +72,11 @@ class Book {
         this.writer = writer;
         this.price = price;
         this.regdate = regdate;
+    }
+
+    @Override
+    public String toString() {
+        String fmt = "%d %s %s %d %s";
+        return String.format(fmt, bookno, title, writer, price, regdate);
     }
 }
