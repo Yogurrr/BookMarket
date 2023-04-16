@@ -29,6 +29,13 @@
 - 만약 초기화를 하지 않으면 객체의 속성이나 필드에는 아무 값도 없을 수 있음
 - 이 경우, 객체를 사용할 때 예기치 않은 오류가 발생할 수 있음
 
+### static 변수
+- 지역 변수의 특성과 전역 변수의 특성을 합친 변수
+- 특정 함수에만 사용 가능하면서도 함수가 끝나더라도 값이 그래도 유지됨
+- 따라서 프로그램이 끝날 때까지 변수 안의 값이 유지됨
+- 모든 전역 변수들은 정적 변수라고 할 수 있음
+- 컴파일 시간에 데이터 영역에 메모리를 할당하여 저장되며 프로그램이 끝나면 자동 삭제됨
+
 ### 추상화
 - 추상화는 클래스들의 공통적인 요소를 뽑아서 상위 클래스를 만들어내는 것
 - 반드시 상위 클래스일 필요는 없어서, 공통적인 속성과 기능을 정의한 하위 클래스를 생성할 수도 있음
@@ -77,7 +84,7 @@
 
 ### DAO
 - Data Access Object
-- 
+
 ### .ready()
 - Tells whether this stream is ready to be read. 
 - A buffered character stream is ready if the buffer is not empty, or if the underlying character stream is ready.
