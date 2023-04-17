@@ -17,7 +17,7 @@ public class J31JDBC {
     private static String updateBookSQL= "update newbooks set title = ?, writer = ?, price = ? where bookno = ?";
 
     public static void main(String[] args) {
-        // newbooks 테이블에서 입력 받은 도서정보(도서번호, 도서명, 저자, 가격)를 이용해서 레코드 삭제
+        // newbooks 테이블에서 입력 받은 도서정보(도서번호, 도서명, 저자, 가격)를 이용해서 레코드 수정
         List<Book> bookdata = new ArrayList<>();
 
         // 수정할 도서번호를 입력 받음
