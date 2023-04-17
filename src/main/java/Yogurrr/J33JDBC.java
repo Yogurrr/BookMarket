@@ -13,7 +13,7 @@ public class J33JDBC {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         // 사원 등록
-        System.out.println("사원 등록을 진행합니다.");
+        /*System.out.println("사원 등록을 진행합니다.");
         System.out.println("사원번호는? ");
         int empno = sc.nextInt();
         System.out.println("성은 ");
@@ -39,9 +39,15 @@ public class J33JDBC {
 
         EMPVO emp = new EMPVO(empno, fname, lname, email, phone, hdate, jobid, sal, comm, mgrid, deptno);
         int cnt = EMPDAOImpl.insertEmp(emp);
-        if (cnt > 0) System.out.println("사원 정보 입력 성공!!");
+        if (cnt > 0) System.out.println("사원 정보 입력 성공!!");*/
 
         // 사원 조회
+        List<EMPVO> empdata = EMPDAOImpl.selectEmp();
+
+        String fmt = "%d %s %s %s %d\n";
+        for (EMPVO emp : empdata) {
+            System.out.printf(fmt, emp.getEmpno(), emp.getFname(), emp.getEmail(), emp.getJobid(), emp.getDeptno());
+        }
 
         // 사원 상세 조회
 
@@ -187,8 +193,8 @@ interface EMPDAO {
 
 class EMPDAOImpl {
     private static String insertEmpSQL = "insert into EMPLOYEES values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static String selectEmpSQL = "select * from EMPLOYEES order by empno";
-    private static String selectOneEmpSQL = "select * from EMPLOYEES";
+    private static String selectEmpSQL = "select employee_id, first_name, email, job_id, department_id from EMPLOYEES order by employee_id";
+    private static String selectOneEmpSQL = "select * from EMPLOYEES where employee_id = ?";
     private static String updateEmpSQL = "select * from EMPLOYEES";
     private static String deleteEmpSQL = "select * from EMPLOYEES";
 
@@ -224,35 +230,32 @@ class EMPDAOImpl {
         return cnt;
     }
     public static List<EMPVO> selectEmp() {
-        List<EMPVO> empdata = new ArrayList<>();
-
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
+        List<EMPVO> empdata = new ArrayList<>();
+
         try {
             conn = J34JDBCUtil.makeConn();
             pstmt = conn.prepareStatement(selectEmpSQL);
-
             rs = pstmt.executeQuery();
 
             while(rs.next()) {
-                EMPVO empvo = new EMPVO(rs.getInt(1),
-                        rs.getString(2), rs.getString(3), rs.getString(4),
-                        rs.getString(5), rs.getString(6), rs.getString(7),
-                        rs.getInt(8), rs.getDouble(9), rs.getInt(10),
-                        rs.getInt(11));
-                empdata.add(empvo);
+                EMPVO emp = new EMPVO(rs.getInt(1), rs.getString(2), "",
+                        rs.getString(3), "", "",  rs.getString(4),
+                        0, 0.0, 0, rs.getInt(5));
+                empdata.add(emp);
             }
-
         } catch (Exception ex) {
             System.out.println("selectEmp에서 오류 발생!!");
             System.out.println(ex.getMessage());
         } finally {
             J34JDBCUtil.closeConn(rs, pstmt, conn);
         }
-        return null;
+        return empdata;
     }
+
     public static EMPVO selectOneEmp(int empno) {
         Connection conn = null;
         PreparedStatement pstmt = null;
