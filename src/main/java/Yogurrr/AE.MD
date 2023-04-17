@@ -104,3 +104,5 @@
 - ResultSet 객체를 반환하는 SQL문의 경우에 사용
 
 ### executeUpdate
+- INSERT, UPDATE, DELETE 등 (DML), CREATE, DROP 등(DDL)문들을 실행하는데 사용
+- 반환값 : int
