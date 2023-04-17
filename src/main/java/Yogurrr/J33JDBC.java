@@ -50,6 +50,11 @@ public class J33JDBC {
         }
 
         // 사원 상세 조회
+        System.out.println("조회할 사원번호는? ");
+        int empno = sc.nextInt();
+
+        EMPVO emp = EMPDAOImpl.selectOneEmp(empno);
+        if (emp != null) System.out.println(emp);
 
         // 사원 수정
 
@@ -196,7 +201,7 @@ class EMPDAOImpl {
     private static String selectEmpSQL = "select employee_id, first_name, email, job_id, department_id from EMPLOYEES order by employee_id";
     private static String selectOneEmpSQL = "select * from EMPLOYEES where employee_id = ?";
     private static String updateEmpSQL = "select * from EMPLOYEES";
-    private static String deleteEmpSQL = "select * from EMPLOYEES";
+    private static String deleteEmpSQL = "delete * from EMPLOYEES where employee_id = ?";
 
     public static int insertEmp(EMPVO emp) {
         Connection conn = null;
@@ -259,20 +264,30 @@ class EMPDAOImpl {
     public static EMPVO selectOneEmp(int empno) {
         Connection conn = null;
         PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        EMPVO emp = null;
 
         try {
             conn = J34JDBCUtil.makeConn();
             pstmt = conn.prepareStatement(selectOneEmpSQL);
+            pstmt.setInt(1, empno);
 
-            int cnt = pstmt.executeUpdate();
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                emp = new EMPVO(rs.getInt(1), rs.getString(2), rs.getString(3),
+                        rs.getString(4), rs.getString(5), rs.getString(6),
+                        rs.getString(7), rs.getInt(8), rs.getDouble( 9),
+                        rs.getInt(10), rs.getInt(11));
+            }
 
         } catch (Exception ex) {
             System.out.println("selectOneEmp에서 오류 발생!!");
             System.out.println(ex.getMessage());
         } finally {
-            J34JDBCUtil.closeConn(null, pstmt, conn);
+            J34JDBCUtil.closeConn(rs, pstmt, conn);
         }
-        return null;
+        return emp;
     }
     public static int updateEmp(EMPVO emp) {
         Connection conn = null;
@@ -295,10 +310,12 @@ class EMPDAOImpl {
     public static int deleteEmp(int empno) {
         Connection conn = null;
         PreparedStatement pstmt = null;
+        int emp = 0;
 
         try {
             conn = J34JDBCUtil.makeConn();
-            pstmt = conn.prepareStatement(insertEmpSQL);
+            pstmt = conn.prepareStatement(deleteEmpSQL);
+            pstmt.setInt(1, empno);
 
             int cnt = pstmt.executeUpdate();
 
@@ -308,6 +325,6 @@ class EMPDAOImpl {
         } finally {
             J34JDBCUtil.closeConn(null, pstmt, conn);
         }
-        return 0;
+        return emp;
     }
 }
