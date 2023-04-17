@@ -7,10 +7,6 @@ import java.util.Scanner;
 import java.util.StringJoiner;
 
 public class J28JDBC {
-    private static String DRV = "org.mariadb.jdbc.Driver";
-    private static String URL = "jdbc:mariadb://fullstacks.cvdlpxnz2ebi.ap-northeast-2.rds.amazonaws.com:3306/fullstacks";
-    private static String USR = "admin";
-    private static String PWD = "fullstack_2023";
 
     private static String selectBookSQL= "select * from newbooks order by bookno desc";
 
@@ -18,18 +14,12 @@ public class J28JDBC {
         // newbooks 테이블의 모든 레코드 조회
         List<Book> bookdata = new ArrayList<>();
 
-        try {
-            Class.forName(DRV);
-        } catch (ClassNotFoundException e) {
-            System.out.println("mariadb 용 JDBC 드라이버가 없어요!!");
-        }
-
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
         try {
-            conn = DriverManager.getConnection(URL, USR, PWD);
+            conn = J32JDBCUtil.makeConn();
             pstmt = conn.prepareStatement(selectBookSQL);
 
             // SQL문 실행 후 결과집합 받음
@@ -45,9 +35,10 @@ public class J28JDBC {
         } catch (SQLException e) {
             System.out.println("디비 접속주소나 아이디/비번, SQL문을 확인하세요!!");
         } finally {
-            if (rs != null) try { rs.close(); } catch (Exception ex) {}
-            if (pstmt != null) try { pstmt.close(); } catch (Exception ex) {}
-            if (conn != null) try { conn.close(); } catch (Exception ex) {}
+            // static으로 선언된 메서드는
+            // 객체 생성 없이 바로 호출 가능
+            // 단, 클래스명.메서드명으로 호출해야 됨
+            J32JDBCUtil.closeConn(rs, pstmt, conn);
         }
 
         // 도서정보 출력
