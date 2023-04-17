@@ -88,3 +88,27 @@
 ### .ready()
 - Tells whether this stream is ready to be read. 
 - A buffered character stream is ready if the buffer is not empty, or if the underlying character stream is ready.
+
+### PreparedStatement
+- SQL문 사용에 있어 Statement 구문은 SQL Injection이라는 취약점을 가지고 있어 사용하길 권장X
+- 따라서 이 대안으로 PreparedStatement을 사용
+- PreparedStatement pstmt = null 과 같이 선언하여 사용하고 기존과 같이 선언한 conn을 pstmt = conn.preparedStatement(query문); 과 같이 대입하여 사용
+- 쿼리문을 바로 넣으며 쿼리문에는 ? 키워드를 사용
+- 예를들어 'SELECT * FROM student WHERE mun = ? AND num = ?' 라고 하고 pstmt에 집어넣고 pstmt.set[자료형](?표 순서, 들어갈 값으로 앞의 자료형과 같아야 함)
+
+
+위와 같은 형식으로 입력한다고 칠 때
+
+
+pstmt.setString(1, "ABC");
+
+pstmt.setInt(2, 3);
+
+
+이라고 입력하면 1번 ?에 ABC가 들어가고 2번 ?에 3이라는 값이 들어가
+
+
+SELECT * FROM student WHERE mun = 'ABC' AND num = 3 이라는 쿼리문이 완성된다.
+
+
+setString의 경우는 작은 따옴표 '' 키워드는 자동으로 입력
