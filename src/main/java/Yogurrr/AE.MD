@@ -91,24 +91,16 @@
 
 ### PreparedStatement
 - SQL문 사용에 있어 Statement 구문은 SQL Injection이라는 취약점을 가지고 있어 사용하길 권장X
-- 따라서 이 대안으로 PreparedStatement을 사용
-- PreparedStatement pstmt = null 과 같이 선언하여 사용하고 기존과 같이 선언한 conn을 pstmt = conn.preparedStatement(query문); 과 같이 대입하여 사용
-- 쿼리문을 바로 넣으며 쿼리문에는 ? 키워드를 사용
-- 예를들어 'SELECT * FROM student WHERE mun = ? AND num = ?' 라고 하고 pstmt에 집어넣고 pstmt.set[자료형](?표 순서, 들어갈 값으로 앞의 자료형과 같아야 함)
+- 따라서 이 대안으로 PreparedStatement(pstmt)을 사용
 
+### SQL Injection
+- SQL Injection 이란 악의적인 사용자가 보안상의 취약점을 이용하여, 임의의 SQL 문을 주입하고 실행되게 하여 데이터베이스가 비정상적인 동작을 하도록 조작하는 행위
+- 인젝션 공격은 OWASP Top10 중 첫 번째에 속해 있으며, 공격이 비교적 쉬운 편이고 공격에 성공할 경우 큰 피해를 입힐 수 있는 공격
 
-위와 같은 형식으로 입력한다고 칠 때
+### ResultSet
+- SELECT문의 결과를 저장하는 객체
 
+### executeQuery(String SQL)
+- ResultSet 객체를 반환하는 SQL문의 경우에 사용
 
-pstmt.setString(1, "ABC");
-
-pstmt.setInt(2, 3);
-
-
-이라고 입력하면 1번 ?에 ABC가 들어가고 2번 ?에 3이라는 값이 들어가
-
-
-SELECT * FROM student WHERE mun = 'ABC' AND num = 3 이라는 쿼리문이 완성된다.
-
-
-setString의 경우는 작은 따옴표 '' 키워드는 자동으로 입력
+### executeUpdate
