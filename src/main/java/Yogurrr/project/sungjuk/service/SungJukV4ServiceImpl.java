@@ -65,22 +65,16 @@ public class SungJukV4ServiceImpl implements SungJukV1cService {   // 키보드 
     }
 
     public void removeSungJuk() {
-        // 이름 입력 -> 대상 검색 -> 대상 제거
-        System.out.print("삭제할 학생 이름은?");
-        String name = sc.next();
+        // 번호 입력 -> 대상 검색 -> 대상 제거
+        System.out.print("삭제할 학생번호는?");
+        int sjno = sc.nextInt();
 
-        for (SungJukVO sj : sjs) {
-            if (sj.getNames().equals(name)) {
-                sjs.remove(sj);   // 대상을 list에서 삭제
-                System.out.println("\n삭제되었습니다\n");
-                break;
-            }
-        }
+        if (sjdao.deleteSungJuk(sjno) > 0) System.out.println("성적데이터 삭제 완료!!");
     }
 
     public void modifySungJuk() {
         // 이름 입력 -> 대상 검색 -> 새로운 데이터 입력 -> 성적 처리
-        System.out.print("수정할 학생 이름은? ");
+        System.out.print("수정할 학생 번호는? ");
         String name = sc.next();
 
         for (int i = 0; i < sjs.size(); i++) {

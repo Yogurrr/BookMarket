@@ -110,9 +110,9 @@ public class SungJukV4DAOImpl implements SungJukV4DAO {
     public int updateSungJuk(SungJukVO sj) {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
+        int cnt = 0;
 
-        List<SungJukVO> sjdata = new ArrayList<>();
+//        List<SungJukVO> sjdata = new ArrayList<>();
 
         try {
             conn = MariaDB.makeConn();
@@ -138,27 +138,21 @@ public class SungJukV4DAOImpl implements SungJukV4DAO {
     public int deleteSungJuk(int sjno) {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
-
-        List<SungJukVO> sjdata = new ArrayList<>();
+        int cnt = 0;
 
         try {
             conn = MariaDB.makeConn();
             pstmt = conn.prepareStatement(deleteSQL);
-            rs = pstmt.executeQuery();
+            pstmt.setInt(1, sjno);
 
-            while(rs.next()) {
-                SungJukVO sj = new SungJukVO(rs.getString(1), rs.getInt(2), rs.getInt(3),
-                        rs.getInt(4));
-                sjdata.add(sj);
-            }
+            cnt = pstmt.executeUpdate();
         } catch (Exception ex) {
-            System.out.println("selectSungJuk에서 오류 발생!!");
+            System.out.println("deleteSungJuk에서 오류 발생!!");
             ex.printStackTrace();
         } finally {
-            MariaDB.closeConn(rs, pstmt, conn);
+            MariaDB.closeConn(null, pstmt, conn);
         }
 
-        return 0;
+        return cnt;
     }
 }
