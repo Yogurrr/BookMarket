@@ -14,14 +14,14 @@ public class SungJukV4DAOImpl implements SungJukV4DAO {
     private String insertSQL = "insert into sungjuk (name, kor, eng, mat, tot, avg, grd) values (?, ?, ?, ?, ?, ?, ?)";
     private String selectSQL = "select sjno, name, kor, eng, mat from sungjuk order by sjno";
     private String selectOneSQL = "select * from sungjuk where sjno = ?";
-    private String updateSQL = "update sungjuk set name = ?, kor = ?, eng = ?, mat = ? where sjno = ?";
+    private String updateSQL = "update sungjuk set kor = ?, eng = ?, mat = ?, tot = ?, avg = ?, grd = ? where sjno = ?";
     private String deleteSQL = "delete from sungjuk where sjno = ?";
 
     @Override
     public int insertSungJuk(SungJukVO sj) {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        int cnt = 0;
+        int cnt = -1;
 
         try {
             conn = MariaDB.makeConn();
@@ -110,28 +110,29 @@ public class SungJukV4DAOImpl implements SungJukV4DAO {
     public int updateSungJuk(SungJukVO sj) {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        int cnt = 0;
-
-//        List<SungJukVO> sjdata = new ArrayList<>();
+        int cnt = -1;
 
         try {
             conn = MariaDB.makeConn();
             pstmt = conn.prepareStatement(updateSQL);
-            rs = pstmt.executeQuery();
+            pstmt.setInt(1, sj.getKors());
+            pstmt.setInt(2, sj.getEngs());
+            pstmt.setInt(3, sj.getMats());
+            pstmt.setInt(4, sj.getTots());
+            pstmt.setDouble(5, sj.getAvgs());
+            pstmt.setString(6, sj.getGrds()+"");
+            pstmt.setInt(7, sj.getSjno());
 
-            while(rs.next()) {
-                SungJukVO sjs = new SungJukVO(rs.getString(1), rs.getInt(2), rs.getInt(3),
-                        rs.getInt(4));
-                sjdata.add(sjs);
-            }
+            cnt = pstmt.executeUpdate();
+
         } catch (Exception ex) {
-            System.out.println("selectSungJuk에서 오류 발생!!");
+            System.out.println("updateSungJuk에서 오류 발생!!");
             ex.printStackTrace();
         } finally {
-            MariaDB.closeConn(rs, pstmt, conn);
+            MariaDB.closeConn(null, pstmt, conn);
         }
 
-        return 0;
+        return cnt;
     }
 
     @Override

@@ -92,6 +92,7 @@
 ### PreparedStatement
 - SQL문 사용에 있어 Statement 구문은 SQL Injection이라는 취약점을 가지고 있어 사용하길 권장X
 - 따라서 이 대안으로 PreparedStatement(pstmt)을 사용
+- 자바에서 쿼리문을 사용할 때 java.sql 패키지에 있는 Statement를 사용
 
 ### SQL Injection
 - SQL Injection 이란 악의적인 사용자가 보안상의 취약점을 이용하여, 임의의 SQL 문을 주입하고 실행되게 하여 데이터베이스가 비정상적인 동작을 하도록 조작하는 행위
