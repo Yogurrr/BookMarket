@@ -222,7 +222,7 @@ class EMPVO {
 }
 
 interface EMPDAO {
-    int insertEMP(EMPVO emp);
+    int insertEmp(EMPVO emp);
     List<EMPVO> selectEmp();
     EMPVO selectOneEmp(int empno);
     int updateEmp(EMPVO emp);
