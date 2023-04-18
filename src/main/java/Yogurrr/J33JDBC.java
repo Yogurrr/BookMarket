@@ -16,7 +16,7 @@ public class J33JDBC {
         /*System.out.println("사원 등록을 진행합니다.");
         System.out.println("사원번호는? ");
         int empno = sc.nextInt();
-        System.out.println("성은 ");
+        System.out.println("성은? ");
         String fname = sc.next();
         System.out.println("이름은? ");
         String lname = sc.next();
@@ -57,13 +57,27 @@ public class J33JDBC {
         if (emp != null) System.out.println(emp);*/
 
         // 사원 수정
+        System.out.println("수정할 사원번호는? ");
+        int empno = sc.nextInt();
+        System.out.println("성은? ");
+        String fname = sc.next();
+        System.out.println("이름은? ");
+        String lname = sc.next();
+        System.out.println("이메일은? ");
+        String email = sc.next();
+        System.out.println("전화번호는? ");
+        String phone = sc.next();
+
+        EMPVO emp = new EMPVO(empno, fname, lname, email, phone);
+        int cnt = EMPDAOImpl.updateEmp(emp);
+        if (cnt > 0) System.out.println("사원 정보 수정 성공!");
 
         // 사원 삭제
-        System.out.println("삭제할 사원번호는? ");
+        /*System.out.println("삭제할 사원번호는? ");
         int empno = sc.nextInt();
 
         int cnt = EMPDAOImpl.deleteEmp(empno);
-        if (cnt > 0) System.out.println("사원 정보 삭제 성공!!");
+        if (cnt > 0) System.out.println("사원 정보 삭제 성공!!");*/
 
     }
 }
@@ -96,6 +110,14 @@ class EMPVO {
         this.comm = comm;
         this.mgrid = mgrid;
         this.deptno = deptno;
+    }
+
+    public EMPVO(int empno, String fname, String lname, String email, String phone) {
+        this.empno = empno;
+        this.fname = fname;
+        this.lname = lname;
+        this.email = email;
+        this.phone = phone;
     }
 
     public int getEmpno() {
@@ -205,7 +227,7 @@ class EMPDAOImpl {
     private static String insertEmpSQL = "insert into EMPLOYEES values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static String selectEmpSQL = "select employee_id, first_name, email, job_id, department_id from EMPLOYEES order by employee_id";
     private static String selectOneEmpSQL = "select * from EMPLOYEES where employee_id = ?";
-    private static String updateEmpSQL = "select * from EMPLOYEES";
+    private static String updateEmpSQL = "update EMPLOYEES set first_name = ?, last_name = ?, email = ?, phone_number = ? where employee_id = ?";
     private static String deleteEmpSQL = "delete from EMPLOYEES where employee_id = ?";
 
     public static int insertEmp(EMPVO emp) {
@@ -297,12 +319,18 @@ class EMPDAOImpl {
     public static int updateEmp(EMPVO emp) {
         Connection conn = null;
         PreparedStatement pstmt = null;
+        int cnt = 0;
 
         try {
             conn = J34JDBCUtil.makeConn();
-            pstmt = conn.prepareStatement(insertEmpSQL);
+            pstmt = conn.prepareStatement(updateEmpSQL);
+            pstmt.setString(1, emp.getFname());
+            pstmt.setString(2, emp.getLname());
+            pstmt.setString(3, emp.getEmail());
+            pstmt.setString(4, emp.getPhone());
+            pstmt.setInt(5, emp.getEmpno());
 
-            int cnt = pstmt.executeUpdate();
+            cnt = pstmt.executeUpdate();
 
         } catch (Exception ex) {
             System.out.println("updateEmp에서 오류 발생!!");
