@@ -1,15 +1,8 @@
 package Yogurrr.project.sungjuk.model;
 
 public class SungJukVO {
-//    public static void main(String[] args) {
-//        SungJukVO d1 = new SungJukVO("홍길동1", 100, 90, 97);
-//        SungJukVO d2 = new SungJukVO("홍길동2", 50, 66, 43);
-//        SungJukVO d3 = new SungJukVO("홍길동3", 73, 79, 88);
-//        System.out.println(d1);
-//        System.out.println(d2);
-//        System.out.println(d3);
-//    }
 
+    private int sjno;
     private String names;
     private int kors;
     private int engs;
@@ -17,6 +10,7 @@ public class SungJukVO {
     private int tots;
     private double avgs;
     private char grds;
+    private String regdate;
 
     // 기본 생성자를 꼭 만들어야 함!!
     public SungJukVO() {
@@ -47,6 +41,10 @@ public class SungJukVO {
         this.avgs = avgs;
         this.grds = grds;
     }
+
+    public int getSjno() { return sjno; }
+
+    public void setSjno(int sjno) { this.sjno = sjno; }
 
     public String getNames() {
         return names;
@@ -102,6 +100,14 @@ public class SungJukVO {
 
     public void setGrds(char grds) {
         this.grds = grds;
+    }
+
+    public String getRegdate() {
+        return regdate;
+    }
+
+    public void setRegdate(String regdate) {
+        this.regdate = regdate;
     }
 
     @Override

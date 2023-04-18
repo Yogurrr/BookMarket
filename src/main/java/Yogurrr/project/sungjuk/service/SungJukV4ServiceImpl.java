@@ -133,11 +133,11 @@ public class SungJukV4ServiceImpl implements SungJukV1cService {   // 키보드 
 
     // 성적 리스트 조회 (이름, 국어, 영어, 수학)
     public void readSungJuk() {
-        String fmt = "\n%s %d %d %d\n\n";
+        String fmt = "\n%d %s %d %d %d\n\n";
 
         try {
-            for (SungJukVO sj : sjs) {
-                if (sj != null) System.out.printf(fmt, sj.getNames(), sj.getKors(), sj.getEngs(), sj.getMats());
+            for (SungJukVO sj : sjdao.selectSungJuk()) {
+                if (sj != null) System.out.printf(fmt, sj.getSjno(), sj.getNames(), sj.getKors(), sj.getEngs(), sj.getMats());
             }   // sjs 배열에 저장된 모든 성적 데이터 출력
         } catch (NullPointerException ex) {
         }

@@ -56,25 +56,96 @@ public class SungJukV4DAOImpl implements SungJukV4DAO {
         try {
             conn = MariaDB.makeConn();
             pstmt = conn.prepareStatement(selectSQL);
+            rs = pstmt.executeQuery();
+
+            while(rs.next()) {
+                SungJukVO sj = new SungJukVO(rs.getString(2),
+                        rs.getInt(3), rs.getInt(4), rs.getInt(5));
+                sj.setSjno(rs.getInt(1));
+                sjdata.add(sj);
+            }
         } catch (Exception ex) {
-            System.out.println("");
+            System.out.println("selectSungJuk에서 오류 발생!!");
+            ex.printStackTrace();
+        } finally {
+            MariaDB.closeConn(rs, pstmt, conn);
+        }
+
+        return sjdata;
+    }
+
+    @Override
+    public SungJukVO selectOneSungJuk(int sjno) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            conn = MariaDB.makeConn();
+            pstmt = conn.prepareStatement(selectOneSQL);
+
+        } catch (Exception ex) {
+            System.out.println("selectSungJuk에서 오류 발생!!");
+            ex.printStackTrace();
+        } finally {
+            MariaDB.closeConn(null, pstmt, conn);
         }
 
         return null;
     }
 
     @Override
-    public SungJukVO selectOneSungJuk(int sjno) {
-        return null;
-    }
-
-    @Override
     public int updateSungJuk(SungJukVO sj) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        List<SungJukVO> sjdata = new ArrayList<>();
+
+        try {
+            conn = MariaDB.makeConn();
+            pstmt = conn.prepareStatement(updateSQL);
+            rs = pstmt.executeQuery();
+
+            while(rs.next()) {
+                SungJukVO sjs = new SungJukVO(rs.getString(1), rs.getInt(2), rs.getInt(3),
+                        rs.getInt(4));
+                sjdata.add(sjs);
+            }
+        } catch (Exception ex) {
+            System.out.println("selectSungJuk에서 오류 발생!!");
+            ex.printStackTrace();
+        } finally {
+            MariaDB.closeConn(rs, pstmt, conn);
+        }
+
         return 0;
     }
 
     @Override
     public int deleteSungJuk(int sjno) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        List<SungJukVO> sjdata = new ArrayList<>();
+
+        try {
+            conn = MariaDB.makeConn();
+            pstmt = conn.prepareStatement(deleteSQL);
+            rs = pstmt.executeQuery();
+
+            while(rs.next()) {
+                SungJukVO sj = new SungJukVO(rs.getString(1), rs.getInt(2), rs.getInt(3),
+                        rs.getInt(4));
+                sjdata.add(sj);
+            }
+        } catch (Exception ex) {
+            System.out.println("selectSungJuk에서 오류 발생!!");
+            ex.printStackTrace();
+        } finally {
+            MariaDB.closeConn(rs, pstmt, conn);
+        }
+
         return 0;
     }
 }
