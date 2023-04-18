@@ -112,7 +112,7 @@ public class SungJukVO {
 
     @Override
     public String toString() {
-        String fmt = "%s %d %d %d %d %.1f %c\n";
-        return String.format(fmt, names, kors, engs, mats, tots, avgs, grds);
+        String fmt = "%d %s %d %d %d %d %.1f %c %s\n";
+        return String.format(fmt, sjno, names, kors, engs, mats, tots, avgs, grds, regdate);
     }
 }

@@ -108,24 +108,14 @@ public class SungJukV4ServiceImpl implements SungJukV1cService {   // 키보드 
     }
 
     public void readOneSungJuk() {
-        // 이름 입력 -> 대상 검색 -> 대상 출력
-        System.out.print("조회할 학생 이름은? ");
-        String name = sc.next();
+        // 번호 입력 -> 대상 검색 -> 대상 출력
+        System.out.print("조회할 학생번호는? ");
+        int sjno = sc.nextInt();
 
-        SungJukVO one = null;
+        SungJukVO sj = sjdao.selectOneSungJuk(sjno);
 
-        try {
-            for (SungJukVO sj : sjs) {
-                if (sj != null && sj.getNames().equals(name)) {
-                    one = sj;
-                    break;
-                }
-            }
-        } catch (NullPointerException ex) {
-        }
-
-        if (one != null) {
-            System.out.printf("\n%s\n", one);
+        if (sj != null) {
+            System.out.printf("\n%s\n", sj);
         } else {
             System.out.println("찾는 데이터가 없습니다!\n");
         }
